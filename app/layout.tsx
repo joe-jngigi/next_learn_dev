@@ -19,8 +19,9 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
           <h1 className='text-2xl font-bold'>Next App</h1>
           <span className=' flex gap-5 items-center justify-between'>
             <Link className='text-xl font-semibold text-orange-400' href= '/'>Go to Home</Link>
-            <Link className='text-xl font-semibold text-emerald-700' href= '/about'>Go to About</Link>
-            <Link className='text-xl font-semibold text-red-700' href= '/blogs'>Go to Blogs</Link>
+            <Link className='text-xl font-semibold text-emerald-700' href= '/about'>About</Link>
+            <Link className='text-xl font-semibold text-red-700' href= '/blogs'>Blogs</Link>
+            <Link className='text-xl font-semibold text-blue-700' href= '/async'>Server Async</Link>
           </span>
         </nav>
 
