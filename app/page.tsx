@@ -14,6 +14,9 @@ export default function Home() {
         <Link className='text-xl font-semibold text-red-600' href='/notifications' >
           Notifications Page
         </Link>
+        <Link className='text-xl font-semibold text-pink-600' href='/typescript' >
+        typescript
+        </Link>
       </div>
     </main>
   )

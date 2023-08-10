@@ -3,7 +3,7 @@ import React from 'react'
 const Notificationspage = () => {
   return (
     <div>
-      https://www.freecodecamp.org/news/how-to-add-post-notifications-to-your-react-applications/
+      <a href="https://www.freecodecamp.org/news/how-to-add-post-notifications-to-your-react-applications/" target="_blank" rel="noopener noreferrer">https://www.freecodecamp.org/news/how-to-add-post-notifications-to-your-react-applications/</a>
     </div>
   )
 }
