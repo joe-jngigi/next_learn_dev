@@ -112,6 +112,14 @@ If you `console.log({...eachData})` you get the following
 
 ### Take away
 
-When you use the spread operator with `{...eachData}`, you're telling JavaScript to treat the string as an iterable and spread its characters into separate properties in an object.
+When you use the spread operator with `{...eachData}`, you're telling JavaScript to treat the string as an iterable and spread its characters into separate properties in an object. Also we note that in `TS`, for any data we describe, it is given an `any` type, so we can describe the data as shown in this section of the code
 
-check out the code structure in [Learning Typescript]()
+```tsx
+FETCHED_DATA.map((eachData: {id: number, title: string, body:string}) =>(
+  <Postcard key= {eachData.id} {...eachData} />
+))
+```
+
+>**NB** This type declaration ensures that when you use the `eachData` object in your code, it should adhere to this specific structure with the defined data types. For example, it prevents you from assigning a non-number value to the id property or a non-string value to the title property.
+
+check out the code structure in [Learning Typescript](https://github.com/joe-jngigi/next_learn_dev/blob/next/app/typescript/page.tsx)

@@ -44,7 +44,7 @@ module.exports = {
         80: '80px',
       },
       minHeight: {
-        590: '590px',
+        590: '88vh',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
