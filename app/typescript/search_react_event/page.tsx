@@ -6,25 +6,8 @@ import EventsParent from './EventsParent'
 import FormEvent from './form_event'
 
 const ReactEvents = () => {
-  const data = [
-    {id:'s', title: 'Post 1', body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, ducimus aliquid, architecto pariatur blanditiis voluptatum placeat soluta ab molestiae sint recusandae, sunt omnis obcaecati iste? Officiis qui cum id vero!'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-    {id:'s', title: 'Post 1', body: 'This post will be dublicated'},
-  ]
+  // console.log(data);
+  
   return (
     <main className='min-h-590'>
       <h1 className='text-4xl font-extrabold mt-5 dark:text-cyan-200 text-slate-900'>React Events With Typescript</h1>
@@ -38,7 +21,7 @@ const ReactEvents = () => {
       <EventsParent>
         <Search />
         <div>
-            <FormEvent data= {data} />
+            <FormEvent />
         </div>
       </EventsParent>
     </main>

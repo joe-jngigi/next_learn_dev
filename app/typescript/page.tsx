@@ -66,6 +66,9 @@ const Typescript = async () => {
         <Link className=' py-4 px-6 rounded-full border-2 duration-700 transition-all hover:text-black hover:dark:bg-green-200' href = '/typescript/search_react_event'>
           React Events
         </Link>
+        <Link className=' py-4 px-6 rounded-full border-2 duration-700 transition-all hover:text-black hover:dark:bg-green-200' href = '/typescript/react_states'>
+          React States
+        </Link>
       </div>
       <div className='grid gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 bg-slate-900 h-full rounded-2xl p-3 mt-7'>
         {/* Map data into cards */}
