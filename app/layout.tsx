@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({children,}: {children: React.ReactNode}) {
   return (
     <html lang="en">
-      <body className= {`w-[95%] mx-auto p-5 ${inter.className}`}>
+      <body className= {`sm:w-[95%] mx-auto p-2 sm:p-5 ${inter.className}`}>
 
         {/* Navbar */}
         <nav className='flex justify-between items-center'>
