@@ -19,6 +19,10 @@ export type productsProps ={
     product_color: string
 }
 
+export type ThemeTypes ={
+    themeValue: 'light' | 'dark'
+}
+
 export type AuthContextType = {
     isAuthenticated: boolean;
     login: () => void;

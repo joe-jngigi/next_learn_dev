@@ -2,6 +2,22 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Random Modal Component Code
+
+```TSX
+<div className='md:hidden overflow-y-hidden bg-slate-500 bg-transparent backdrop-blur-lg fixed top-0 z-50 h-[100%] w-[100%]'>
+    <div className='absolute top-5 right-5 text-slate-50 '>
+      <button className='text-2xl border-2 border-slate-50 rounded-full p-2' onClick={() =>{
+        document.body.style.overflow = 'unset'}}>
+        <MdClose/>
+      </button>
+    </div>
+    <div className='absolute top-0 bg-blend-luminosity bg-black  bg-opacity-90  w-[70%]  h-[100vh] p-2 md:p-5 text-white'>
+      Yeap   
+    </div>
+</div>
+```
+
 ## Getting Started
 
 The `layout` entrypoint for the nextjs components is the main entry point of our application and all the components are wrapped within it as its `children`. As a result, any code that is written will be displayed on every route page that you get to create; like a `</ Header>` and a `</ Navbar>`. This means that the component accepts a children prop.
@@ -160,11 +176,75 @@ In simple terms, you are giving name and sessionId, but you specified that it ca
 > Generics in TypeScript are a powerful feature that allow you to write functions, classes, and types that can work with a variety of data types while maintaining type safety. They allow you to maintain type safety while still dealing with flexible types.
 
 ```TS
+export type userType = {
+    sessionId: number,
+    name: string
+}
+
 const [User, setUser] = useState<userType | null>(null)
 setUser({
   name: username,
   sessionId: Math.random()
 })
+```
+
+### Use case of generics
+
+```TS
+import React, { useState } from 'react';
+
+// Define a generic ListProps
+type ListProps<T> = {
+  items: T[];
+  renderItem: (item: T) => JSX.Element;
+};
+
+// Generic List component
+function List<T>({ items, renderItem }: ListProps<T>) {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{renderItem(item)}</li>
+      ))}
+    </ul>
+  );
+}
+
+// Example usage
+type Person = {
+  name: string;
+  age: number;
+};
+
+function App() {
+  const persons: Person[] = [
+    { name: 'Alice', age: 30 },
+    { name: 'Bob', age: 25 },
+    // ...
+  ];
+
+  return (
+    <div>
+      <h1>Person List</h1>
+      <List items={persons} renderItem={(person) => <div>{person.name} - {person.age}</div>} />
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+In the above piece of code, you note that `ListProps` is a type defined and it has generics. In the prop, `items` receives this array `persons` and then `renderItem` receives a function as a JSX element
+
+```TS
+const persons: Person[] = [
+  { name: 'Alice', age: 30 },
+  { name: 'Bob', age: 25 },
+    // ...
+];
+
+renderItem={(person) => <div>{person.name} - {person.age}</div>}
 ```
 
 > ### Take away #2
@@ -270,8 +350,58 @@ const initialAuthStatus: AuthContextType = {
     logout: () => {},
 }
 
+
 export const AppContext = createContext<AuthContextType>(initialAuthStatus);
 ```
+
+What is `initialAuthStatus`?</br>
+It is called a **default value**, and is required to pe passed in so that when you have forgotten to provide context, that is it is used when there is no provider. That means that everything falls back to default value. Let me break down what is happening here.
+
+`createContext` is a built in react function used to provide context. `AuthContextType` is used in as the generics and it is used to define a the default data type of the context. `initialAuthStatus`  This can be anything, and it used to define a **default value** as shown. I will using a simpler example to see how we can use the context. Suppose we want to change the theme of our application to be maybe `dark mode` or `light mode`. You notice that when we pass in the value `light`, it will have a lint *Argument of type 'string' is not assignable to parameter of type 'ThemeTypes'.*
+
+`export const ThemeContext = createContext<ThemeTypes>('light')`
+
+Since `ThemeTypes` is describing a datatype, same case we will create an variable, with the same structure, that is why we pass it in as an object. An example is shown on how the data type works.
+
+```TS
+// An example is shown on how the data type works.
+const ThemedType: ThemeTypes = {
+    theme_value: 'light'
+}
+```
+
+```TS
+import { createContext } from 'react';
+
+type ThemeTypes ={
+  theme_value: 'light' | `dark`
+}
+// const ThemeContext = createContext('light') => for JS
+
+export const ThemeContext = createContext<ThemeTypes>({
+  theme_value: 'light'
+})
+```
+
+Now we can import the exported `ThemeContext` to be available to our components. This happens to the `main/parent` component that carries all the other components. On importing, the ThemeContext will have three properties; provider, consumer and displayname. `Consumer` is for components that consume those contexts; those that get the value of the provided context. `Provider` Provides the value to the components it wraps around. Provider takes all properties a component can take. like `value`, `key` and `children`. Children are passed in implicitly
+
+```TSX
+import React from 'react'
+import Link from 'next/link'
+import { ThemeContext } from './context/ThemeContext'
+
+const ProductsLayout = ({children}: {children: React.ReactNode}) => {
+  return (
+    <div className='min-h-590'>
+      <ThemeContext.Provider>
+        
+      </ThemeContext.Provider>
+    </div>
+  )
+}
+```
+
+In this, it requires that the new TSX element have the value, in react, we store that in a state now,
 
 `TProducts`: An array of productsProps type. It's intended to store an array of products, each represented by a productsProps object. So this means that TProducts will have the following structure.
 
@@ -301,3 +431,5 @@ Const TProducts = [
 
 **Can I safely say a type/interface is used to describe a data structure of what is intended?**</br>
 Yes, that's a very accurate description of the purpose of types and interfaces in programming, particularly in languages like TypeScript. Both types and interfaces are used to define the structure and shape of data. They help ensure that data adheres to a specific structure and type.
+
+In TypeScript, using the syntax `'light' | 'dark'` as the type of a property indicates that the property can only take one of those two specific string values. This enforces type safety and helps prevent unintended values from being assigned to the property.

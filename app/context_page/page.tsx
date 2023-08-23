@@ -1,10 +1,15 @@
-import React from 'react'
+'use client'
+import React, {useContext} from 'react'
 import { products } from './productdata'
 import { productsProps } from '../typescript/types/types';
+import { ThemeContext } from './context/ThemeContext';
 
 const Contextpage = () => {
   // const init_product = products
-  console.log(products);
+  // console.log(products);
+  const checkTheme = useContext(ThemeContext)
+  console.log('After:' ,checkTheme);
+    // console.log(checkTheme);
   
   return (
     <div className='min-h-[70vh]'>
