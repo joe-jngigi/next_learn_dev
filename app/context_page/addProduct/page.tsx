@@ -1,8 +1,12 @@
 'use client'
 
 import { productsProps } from '@/app/typescript/types/types'
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from '../context/ThemeContext'
 const AddProduct = () => {
+
+  const checkDarkMode = useContext(ThemeContext)
+  console.log(checkDarkMode);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
@@ -13,8 +17,6 @@ const AddProduct = () => {
     const productname = formData.get('product_name')
     console.log(productname);
     
-    
-
     const productData: productsProps = {
       product_id: Math.random(),
       product_name: '',
@@ -31,11 +33,14 @@ const AddProduct = () => {
       } 
     })
     console.log(productData);
-    
   }
+
   return (
-    <div className=' min-h-[70vh] flex justify-center items-center'>
-      <form onSubmit={handleSubmit} className='bg-black flex flex-col gap-5 sm:w-[600px] p-16 rounded-2xl' action="AddProduct">
+    <div className=' min-h-[70vh] flex flex-col justify-center items-center'>
+      <div className= {`text-2xl font-bold p-7`}>
+        <h2>Check Dark Mode</h2>
+      </div>
+      <form onSubmit={handleSubmit} className='bg-black flex flex-col gap-5 sm:w-[600px] p-8 rounded-2xl' action="AddProduct">
         <input required className='rounded-full p-2 bg-main-dark-bg outline-none' type="text" name="product_name" id="product_name" placeholder="Product Name"/>
         <input required className='rounded-full p-2 bg-main-dark-bg outline-none' type="text" name="product_price" id="product_price" placeholder="Product Price"/>
         <input required className='rounded-full p-2 bg-main-dark-bg outline-none' type="text" name="product_description" id="product_description" placeholder="Product Description"/>
