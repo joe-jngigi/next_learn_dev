@@ -448,3 +448,15 @@ Const TProducts = [
 Yes, that's a very accurate description of the purpose of types and interfaces in programming, particularly in languages like TypeScript. Both types and interfaces are used to define the structure and shape of data. They help ensure that data adheres to a specific structure and type.
 
 In TypeScript, using the syntax `'light' | 'dark'` as the type of a property indicates that the property can only take one of those two specific string values. This enforces type safety and helps prevent unintended values from being assigned to the property.
+
+## Pagination in React
+
+In this code, I am making a pagination, and as provided in the code, we will have different elements we use
+
+```TSX
+
+```
+
+`const lastIndex = CurrentPage * recordsPerPage`, on this piece of code, it is going to indicate, the last number for of the current count of data. Simply that means that if we have the first page with 25 records, so last index will hold `number 25` and if we have the second records page, it will have `lastIndex => 2 * 25 = 50`
+
+`const firstIndex = lastIndex - recordsPerPage` on this it means that the value for the firstIndex is the first number on a new page. So this is; I have 25 records per page, so the new number will be `firstIndex => 50 - 25 = 25`

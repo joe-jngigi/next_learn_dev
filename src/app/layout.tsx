@@ -30,7 +30,15 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
 
         {/* Footer */}
         <footer>
-          <h3 className=''>Copyright 2023</h3>
+          <section className=' bg-black  m-auto text-orange-600'>
+            <h5 className='text-sm flex items-center justify-between'>
+              <span className='flex '>
+                <span className='flex'> &copy;{new Date().getFullYear()} <p>&nbsp;BeeST&nbsp;</p></span>
+                  <p className='flex'>All rights reserved.</p>
+                </span>
+              <span><a className='' href="https://github.com/joe-jngigi">| Developer</a></span>
+            </h5>
+          </section>
         </footer>
       </body>
     </html>

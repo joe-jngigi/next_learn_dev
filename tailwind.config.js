@@ -4,17 +4,21 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   // darkMode: 'class',
   theme: {
-    fontFamily: {
-      display: ['Open Sans', 'sans-serif'],
-      body: ['Lato', 'Open Sans' ,'sans-serif'],
-      about: ['Rowdies','cursive'],
-      miniabout :['Sevillana', 'cursive' ],
-      gothic: ['Didact Gothic' , 'sans-serif']
-    },
     extend: {
+      fontFamily: {
+        display: ['Open Sans', 'sans-serif'],
+        body: ['Lato', 'Open Sans' ,'sans-serif'],
+        about: ['Rowdies','cursive'],
+        miniabout :['Sevillana', 'cursive' ],
+        gothic: ['Didact Gothic' , 'sans-serif'],
+        satoshi: ['Satoshi', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+      },
       fontSize: {
         14: '14px',
       },
@@ -24,6 +28,9 @@ module.exports = {
         'secondary-dark-bg': '#33373E',
         'light-gray': '#F7F7F7',
         'half-transparent': 'rgba(0, 0, 0, 0.5)',
+      },
+      colors: {
+        'primary-orange': '#FF5722',
       },
       borderWidth: {
         1: '1px',
@@ -44,7 +51,7 @@ module.exports = {
         80: '80px',
       },
       minHeight: {
-        590: '88vh',
+        590: '590px',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -55,4 +62,3 @@ module.exports = {
   },
   plugins: [],
 };
-
