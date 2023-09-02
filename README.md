@@ -405,18 +405,40 @@ import React from 'react'
 import Link from 'next/link'
 import { ThemeContext } from './context/ThemeContext'
 
+ const [themeValue, setThemeValue] = useState<'light' | 'dark' >(defaultThemeValue.themeValue) )
+
 const ProductsLayout = ({children}: {children: React.ReactNode}) => {
   return (
     <div className='min-h-590'>
-      <ThemeContext.Provider>
-        
+      <ThemeContext.Provider value = {{themeValue}}>
+        // So all the children here have access to the state of theme value
       </ThemeContext.Provider>
     </div>
   )
 }
 ```
 
-In this, it requires that the new TSX element have the value, in react, we store that in a state now,
+So far, we realize that the state mutation is happening in the layout file (This is basically the component holding the children components). We would want to have context change in maybe a specific child component. What do I mean, If I have a `</newProduct>` component and want to mutate a state inside that, I will have to wrap it in `<ThemeContext.Provider>`.
+
+So what we do is that we can define a custom component in the context provider file
+
+```TS
+import { createContext, FC } from "react";
+import { ThemeTypes } from "@/app/typescript/types/types";
+
+export const defaultThemeValue: ThemeTypes = {
+    themeValue: 'light'
+}
+
+export const ThemeContext = createContext<ThemeTypes>(defaultThemeValue)
+
+
+export const ThemeContextProvider:FC<ThemeTypes> = () => {
+
+  return  <ThemeContext></ThemeContext>
+  
+}
+```
 
 `TProducts`: An array of productsProps type. It's intended to store an array of products, each represented by a productsProps object. So this means that TProducts will have the following structure.
 
@@ -453,10 +475,62 @@ In TypeScript, using the syntax `'light' | 'dark'` as the type of a property ind
 
 In this code, I am making a pagination, and as provided in the code, we will have different elements we use
 
-```TSX
-
-```
-
 `const lastIndex = CurrentPage * recordsPerPage`, on this piece of code, it is going to indicate, the last number for of the current count of data. Simply that means that if we have the first page with 25 records, so last index will hold `number 25` and if we have the second records page, it will have `lastIndex => 2 * 25 = 50`
 
 `const firstIndex = lastIndex - recordsPerPage` on this it means that the value for the firstIndex is the first number on a new page. So this is; I have 25 records per page, so the new number will be `firstIndex => 50 - 25 = 25`
+
+## Function components in TS
+
+The use of FC after MyFunctionalComponent is a type annotation in TypeScript. It explicitly specifies that MyFunctionalComponent is a functional component and gives it the type FC, which is typically imported from the React library. FC stands for `Functional Component` and it's a predefined type in TypeScript that helps you define the prop types for functional components. It ensures typesafety.
+
+```TSX
+import React, { FC } from 'react';
+
+interface MyComponentProps {
+  name: string;
+  description: string;
+}
+
+const MyFunctionalComponent: FC<MyComponentProps> = (props) => {
+  return (
+    <div>
+      <h1>Hello, {props.name}!</h1>
+      <p>{props.description}</p>
+    </div>
+  );
+};
+```
+
+In this updated code, MyComponentProps is an interface that defines the prop types for MyFunctionalComponent, and `FC<MyComponentProps>` specifies that this functional component expects props conforming to those types. This adds a layer of type safety and helps communicate the expected props to anyone working with the component.
+
+```TSX
+const App = () => {
+  // This will cause a TypeScript error because 'extraProp' is not in MyComponentProps
+  return (
+    <MyFunctionalComponent name="John" description="A description" extraProp="Extra" />
+  );
+```
+
+When you attempt to pass an additional prop `extraProp` to the component, TypeScript will raise a type error because extraProp is not part of the expected prop types defined in `MyComponentProps`.
+
+```TSX
+import React from 'react';
+
+interface MyComponentProps {
+  name: string;
+  description: string;
+}
+
+const MyFunctionalComponent = (props: MyComponentProps) => {
+  // TypeScript knows that `props` has the type `MyComponentProps`
+  return (
+    <div>
+      <h1>Hello, {props.name}!</h1>
+      <p>{props.description}</p>
+    </div>
+  );
+};
+
+```
+
+Both approaches achieve the same result: they specify that props should conform to the MyComponentProps interface, and TypeScript enforces this type checking. You can choose the approach that you find more readable and maintainable for your codebase. Some developers prefer the FC type because it's a bit shorter and often used in React projects, while others prefer the explicit annotation for clarity.

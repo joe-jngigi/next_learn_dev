@@ -2,11 +2,11 @@
 
 import { productsProps } from '@/app/typescript/types/types'
 import React, { useContext } from 'react'
-import { ThemeContext } from '../context/ThemeContext'
+import { ThemeContext } from '../context/ThemeContextProvider'
 const AddProduct = () => {
 
-  const checkDarkMode = useContext(ThemeContext)
-  console.log(checkDarkMode);
+  const {themeValue} = useContext(ThemeContext)
+  // console.log(themeValue);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
@@ -26,7 +26,6 @@ const AddProduct = () => {
       product_color: ''
     }
 
-    
     formData.forEach((value, key) =>{
       if (typeof value === 'string') {
         productData[key as keyof productsProps] = value;
@@ -37,8 +36,8 @@ const AddProduct = () => {
 
   return (
     <div className=' min-h-[70vh] flex flex-col justify-center items-center'>
-      <div className= {`text-2xl font-bold p-7`}>
-        <h2>Check Dark Mode</h2>
+      <div className= {`${themeValue === 'light' ? 'text-red-500': 'text-green-500' } text-2xl font-bold p-7`}>
+        <h2>{themeValue  === 'light'? 'light mode active': 'dark mode active'}</h2>
       </div>
       <form onSubmit={handleSubmit} className='bg-black flex flex-col gap-5 sm:w-[600px] p-8 rounded-2xl' action="AddProduct">
         <input required className='rounded-full p-2 bg-main-dark-bg outline-none' type="text" name="product_name" id="product_name" placeholder="Product Name"/>

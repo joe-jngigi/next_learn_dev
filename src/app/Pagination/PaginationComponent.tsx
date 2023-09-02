@@ -18,7 +18,7 @@ const PaginationComp = () => {
   console.log(number_of_pages);
   
   const numbers_ = Array.from({ length: number_of_pages }, (_, index) => index + 1);
-  console.log(numbers_);
+  console.log(numbers_.keys());
 
   const prevPage = () =>{
     if(CurrentPage !== 1){

@@ -2,7 +2,7 @@
 import React, {useContext} from 'react'
 import { products } from './productdata'
 import { productsProps } from '../typescript/types/types';
-import { ThemeContext } from './context/ThemeContext';
+import { ThemeContext } from './context/ThemeContextProvider';
 
 const Contextpage = () => {
   // const init_product = products
@@ -15,7 +15,7 @@ const Contextpage = () => {
     <div className='min-h-[70vh]'>
       <h2 className='text-2xl font-semibold text-slate-300 mb-3'>Products</h2>
 
-      <div className='grid sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-5'>
+      <div className='grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5'>
         
         {
           products.map((product: productsProps) =>(

@@ -3,20 +3,15 @@ import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import {MdOutlineLightMode, MdOutlineDarkMode} from 'react-icons/md'
 
-import { ThemeContext, defaultThemeValue } from './context/ThemeContext'
-import { ThemeTypes } from '../typescript/types/types'
+import { ThemeContext, defaultThemeValue } from './context/ThemeContextProvider'
 
 const ProductsLayout = ({children}: {children: React.ReactNode}) => {
 
   // by default it will always be light. So that means I will pass this into the context provider
   const [themeValue, setThemeValue] = useState<'light' | 'dark' >(defaultThemeValue.themeValue) 
-  const [ThemeChange, setthemeChange] = useState(false)
-  
 
   const changeTheme = (e: React.MouseEvent<HTMLButtonElement>) =>{
     e.preventDefault()
-    setthemeChange(!ThemeChange)
-    console.log(ThemeChange);
     setThemeValue((prev) => prev === 'dark' ? 'light' : 'dark')
     
   }
@@ -39,7 +34,7 @@ const ProductsLayout = ({children}: {children: React.ReactNode}) => {
 
           <div>
             <button className='text-2xl' onClick={changeTheme}>
-              {ThemeChange ? ( <MdOutlineDarkMode/> ):(<MdOutlineLightMode />)}
+              {themeValue === 'light'? ( <MdOutlineDarkMode/> ):(<MdOutlineLightMode />)}
             </button>
           </div>
         </div>
