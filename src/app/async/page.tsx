@@ -3,7 +3,7 @@ import React from 'react'
 const Page = async() => {
     await new Promise((resolve) => (setTimeout(resolve, 5000)))
 
-    throw Error ("Yoh G")
+    // throw Error ("Yoh G")
   return (
     <div>
         <p>

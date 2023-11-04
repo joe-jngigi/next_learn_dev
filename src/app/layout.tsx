@@ -1,8 +1,5 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
 import Link from 'next/link'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Next Routing',
@@ -12,11 +9,11 @@ export const metadata = {
 export default function RootLayout({children,}: {children: React.ReactNode}) {
   return (
     <html lang="en">
-      <body className= {`sm:w-[95%] mx-auto p-2 sm:p-5 ${inter.className}`}>
+      <body className= 'sm:w-[95%] mx-auto p-2 sm:p-5'>
 
         {/* Navbar */}
         <nav className='flex justify-between items-center'>
-          <h1 className='text-2xl font-bold'>Next App</h1>
+          <h1 className='text-2xl font-bold'>Joe_JNgigi</h1>
           <span className=' flex gap-5 items-center justify-between'>
             <Link className='text-xl font-semibold text-orange-400' href= '/'>Go to Home</Link>
             <Link className='text-xl font-semibold text-red-700' href= '/blogs'>Blogs</Link>

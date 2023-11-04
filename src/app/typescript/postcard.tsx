@@ -1,6 +1,4 @@
-'use client'
 
-import React, { useEffect } from 'react'
 import { PostProps } from './types/types'
 
 // This should receive data from the post component(Parent)

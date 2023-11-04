@@ -12,17 +12,23 @@ import Postcard from './postcard'
 import { PostProps } from './types/types'
 import React from 'react'
 
+// This gets data from API 
+const getAPIData = async ()=>{
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')    
+  }
+
+  return res.json()
+} 
+
 // To use this piece of code, I can initialize it by initializing the returned data. The data returned is an array
 
 const Typescript = async () => {
 
   const getData = async () =>{
     const response = await fetch('https://jsonplaceholder.typicode.com/posts')
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch data')    
-    }
-    
     const data = await response.json()
     const slicedData = data.slice(0, 50)
     return slicedData
@@ -50,7 +56,7 @@ const Typescript = async () => {
   return (
     <main className='min-h-590'>
       <h1 className='text-4xl font-extrabold mt-5 text-cyan-200'>Learning TypeScript</h1>
-      <p className='mt-2'>You note that this is a server component, and for the cards, I have included the <b>'use client'</b> directive</p>
+      <p className='mt-2'>You note that this is a server component, and for the cards, I have included the <b>use client</b> directive</p>
 
       <div className='flex flex-wrap gap-5 mt-3'>
         <Link className=' py-4 px-6 rounded-full hover:translate-x-1 border-2 duration-700 transition-all hover:text-black hover:dark:bg-green-200' href = '/typescript/react_fragments'>
