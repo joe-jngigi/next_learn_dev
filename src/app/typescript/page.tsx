@@ -12,23 +12,17 @@ import Postcard from './postcard'
 import { PostProps } from './types/types'
 import React from 'react'
 
-// This gets data from API 
-const getAPIData = async ()=>{
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')    
-  }
-
-  return res.json()
-} 
-
 // To use this piece of code, I can initialize it by initializing the returned data. The data returned is an array
 
 const Typescript = async () => {
 
   const getData = async () =>{
     const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch data')    
+    }
+    
     const data = await response.json()
     const slicedData = data.slice(0, 50)
     return slicedData
