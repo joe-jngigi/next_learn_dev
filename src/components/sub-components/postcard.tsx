@@ -1,5 +1,5 @@
 
-import { PostProps } from './types/types'
+import { PostProps } from '@/types/types'
 
 // This should receive data from the post component(Parent)
 const Postcard = (eachData: PostProps ) => {

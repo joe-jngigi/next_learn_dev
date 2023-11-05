@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Postcard from './postcard'
+import Postcard from '../../../components/sub-components/postcard'
 
 
 // Note for this import, we can have it here like this
@@ -9,7 +9,7 @@ import Postcard from './postcard'
 //   body: string,
 // }
 
-import { PostProps } from './types/types'
+import { PostProps } from '@/types/types'
 import React from 'react'
 
 // This gets data from API 

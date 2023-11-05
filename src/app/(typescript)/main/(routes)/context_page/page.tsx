@@ -1,7 +1,7 @@
 'use client'
 import React, {useContext} from 'react'
 import { products } from './productdata'
-import { productsProps } from '../typescript/types/types';
+import { productsProps } from '@/types/types';
 import { ThemeContext } from './context/ThemeContextProvider';
 
 const Contextpage = () => {

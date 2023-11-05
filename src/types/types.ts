@@ -1,3 +1,18 @@
+export type SideMenuContextType = {
+    toggleSideMenu: boolean;
+    settoggleSideMenu: React.Dispatch<React.SetStateAction<boolean>>;
+    notificationDropdown: boolean;
+    setNotificationDropdown: React.Dispatch<React.SetStateAction<boolean>>;
+    toggleMenu: boolean;
+    setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
+    collapsePanel: boolean;
+    setcollapsePanel: React.Dispatch<React.SetStateAction<boolean>>
+};
+
+export type TLayoutProp = {
+    children: React.ReactNode
+}
+
 export type PostProps ={
     id: number,
     title: string,
