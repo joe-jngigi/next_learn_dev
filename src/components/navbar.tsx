@@ -42,9 +42,9 @@ const Navbar = () => {
           </Link>
 
           <Link title='Typescript' href='/main'>
-            <span className="icon-container">
-              <TbBrandTypescript size={24}  className="icon" />
-              <span className="icon-text">TypeScript</span>
+            <span className="icon-container  ">
+              <TbBrandTypescript size={24}  className="icon " />
+              <span className="icon-text ">TypeScript</span>
             </span>
           </Link>
 

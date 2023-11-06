@@ -135,26 +135,8 @@ body {
   background: var(--scrollbar-thumb-hover-color, #555); /* Default light theme color */
 }
 
-.icon-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: color 0.3s;
-}
 
-.icon-text {
-  display: none;
-  transition: color 0.3s;
-}
 
-.icon-container:hover .icon {
-  display: none;
-}
-
-.icon-container:hover .icon-text {
-  display: block;
-}
 
 .textWrap {
   text-wrap: balance;

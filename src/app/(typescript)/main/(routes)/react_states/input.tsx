@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { userType } from '../../../types/types'
+import { userType } from '@/types/types'
 
 const Input = () => {
   const [username, setUsername] = useState('@user')
