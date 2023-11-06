@@ -8,7 +8,6 @@ const Layout: FC<TLayoutProp>  = ({children}) => {
     <div>
       {/* Navbar */}
       <Navbar />
-
       {children}
     </div>
   )

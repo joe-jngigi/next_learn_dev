@@ -3,6 +3,7 @@
 import React, {useContext} from 'react'
 import {MdOutlineMenu } from 'react-icons/md'
 import { FaGithub, FaXTwitter } from 'react-icons/fa6'
+import { TbBrandTypescript } from 'react-icons/tb'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -24,16 +25,30 @@ const Navbar = () => {
   console.log('toggleSideMenu' , toggleSideMenu);
   
   return (
-    <nav className=' px-3  py-5 sm:py-3 bg-white dark:bg-black  shadow-lg'>
+    <nav className=' px-3  py-5 sm:py-3 bg-white  dark:bg-black  shadow-lg'>
       <div className='flex-between'>
         {/* logo */}
         <div>
           <h1 className='text-3xl font-bold text-emerald-500'>{AppName}</h1>
         </div>
 
-        <Link title='Main Page / Home / Joe_J' href= '/'>
-         <LayoutDashboardIcon  />
-        </Link>
+        <div className='flex flex-row gap-3 items-center justify-center'>
+
+          <Link title='Main Page / Home / Joe_J' href= '/'>
+            <span className="icon-container">
+              <LayoutDashboardIcon size={24}  className="icon" />
+              <span className="icon-text">Home</span>
+            </span>
+          </Link>
+
+          <Link title='Typescript' href='/main'>
+            <span className="icon-container">
+              <TbBrandTypescript size={24}  className="icon" />
+              <span className="icon-text">TypeScript</span>
+            </span>
+          </Link>
+
+        </div>
 
         {/* Menu */}
         {/* Mobile Navigation */}
