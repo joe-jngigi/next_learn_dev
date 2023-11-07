@@ -32,20 +32,16 @@ const Navbar = () => {
           <h1 className='text-3xl font-bold text-emerald-500'>{AppName}</h1>
         </div>
 
-        <div className='flex flex-row gap-3 items-center justify-center'>
+        <div className='flex flex-row gap-6 items-center justify-center'>
 
-          <Link title='Main Page / Home / Joe_J' href= '/'>
-            <span className="icon-container">
-              <LayoutDashboardIcon size={24}  className="icon" />
-              <span className="icon-text">Home</span>
-            </span>
+          <Link title='Main Page / Home / Joe_J' className='sm:flex flex-col items-center justify-center transition-all duration-700 hover:text-emerald-500' href= '/'>
+            <LayoutDashboardIcon size={24}  className="" />
+            <span className="text-xs pt-1">{`<Main />`}</span>
           </Link>
 
-          <Link title='Typescript' href='/main'>
-            <span className="icon-container  ">
-              <TbBrandTypescript size={24}  className="icon " />
-              <span className="icon-text ">TypeScript</span>
-            </span>
+          <Link title='Typescript' className='flex flex-col items-center justify-center transition-all duration-700 hover:text-emerald-500' href='/main'>
+            <TbBrandTypescript size={24}  className="" />
+            <span className="text-xs pt-1">{`<TypeScript />`}</span>
           </Link>
 
         </div>
