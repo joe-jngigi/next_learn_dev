@@ -25,7 +25,7 @@ const Navbar = () => {
   console.log('toggleSideMenu' , toggleSideMenu);
   
   return (
-    <nav className=' px-3  py-5 sm:py-3 bg-white  dark:bg-black  shadow-lg'>
+    <nav className=' px-3 fixed top-0 w-full py-5 sm:py-3 bg-white  dark:bg-black  shadow-lg'>
       <div className='flex-between'>
         {/* logo */}
         <div>
@@ -34,13 +34,13 @@ const Navbar = () => {
 
         <div className='flex flex-row gap-6 items-center justify-center'>
 
-          <Link title='Main Page / Home / Joe_J' className='sm:flex flex-col items-center justify-center transition-all duration-700 hover:text-emerald-500' href= '/'>
-            <LayoutDashboardIcon size={24}  className="" />
+          <Link title='Main Page / Home / Joe_J' className='dark:hover:bg-main-dark-bg p-2 rounded-2xl duration-500 sm:flex flex-col items-center justify-center transition-all duration-700 hover:text-emerald-500' href= '/'>
+            <LayoutDashboardIcon size={20}  className="" />
             <span className="text-xs pt-1">{`<Main />`}</span>
           </Link>
 
-          <Link title='Typescript' className='flex flex-col items-center justify-center transition-all duration-700 hover:text-emerald-500' href='/main'>
-            <TbBrandTypescript size={24}  className="" />
+          <Link title='Typescript' className='dark:hover:bg-main-dark-bg p-2 rounded-2xl duration-500 flex flex-col items-center justify-center transition-all duration-700 hover:text-emerald-500' href='/main'>
+            <TbBrandTypescript size={20}  className="" />
             <span className="text-xs pt-1">{`<TypeScript />`}</span>
           </Link>
 
@@ -61,16 +61,16 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div  className='relative hidden md:flex justify-between items-center gap-6 rounded-2xl border-1 dark:border-slate-900 p-2'>
 
-          <Link title='My github link... Yey. This is where I store my code... it is private I am not sure why I like it like that' href= 'https://github.com/joe-jngigi'>
-           <FaGithub size={24}/>
+          <Link title='My github link... Yey. This is where I store my code... it is private I am not sure why I like it like that' className='dark:hover:bg-main-dark-bg p-2 rounded-2xl duration-500' href= 'https://github.com/joe-jngigi'>
+           <FaGithub size={20}/>
           </Link>
 
-          <Link title='Twitter handle. I know it is X but for me it is twitter' href= 'https://twitter.com/joe_jngigi'>
-           <FaXTwitter size={24} />
+          <Link title='Twitter handle. I know it is X but for me it is twitter' className='text-blue-900 dark:hover:bg-main-dark-bg p-2 rounded-2xl duration-500' href= 'https://twitter.com/joe_jngigi'>
+           <FaXTwitter size={20} />
           </Link>
 
-          <Link title='Well, this linkedin' href= 'https://www.linkedin.com/in/joejngigi/'>
-           <Linkedin size={24}/>
+          <Link title='Well, this linkedin' className='text-blue-500 dark:hover:bg-main-dark-bg p-2 rounded-2xl duration-500' href= 'https://www.linkedin.com/in/joejngigi/'>
+           <Linkedin size={20}/>
           </Link>
 
           {/* User Profile */}

@@ -10,7 +10,8 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
   return (
     <html lang="en">
       <body className= 'sm:w-[1900px] mx-auto sms:px-3'>
-
+        {/* Navbar */}
+        <Navbar />
         {children}
         
       </body>
