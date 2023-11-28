@@ -1,4 +1,4 @@
 
-export const AppName = 'Developer (SaaS)';
+export const AppName = 'GitGallery';
 
 export const username = 'Joe_J'
