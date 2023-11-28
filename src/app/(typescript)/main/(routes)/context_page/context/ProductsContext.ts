@@ -1,4 +1,4 @@
-import { productsProps, AuthContextType } from "@/app/typescript/types/types"
+import { productsProps, AuthContextType } from '@/types/types'
 import { createContext } from "react"
 
 type TProductContext = {

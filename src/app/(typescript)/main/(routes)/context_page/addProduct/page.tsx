@@ -1,6 +1,6 @@
 'use client'
 
-import { productsProps } from '@/app/typescript/types/types'
+import { productsProps } from '@/types/types'
 import React, { useContext } from 'react'
 import { ThemeContext } from '../context/ThemeContextProvider'
 const AddProduct = () => {

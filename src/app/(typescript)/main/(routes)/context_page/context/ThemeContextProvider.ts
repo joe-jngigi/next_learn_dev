@@ -1,7 +1,7 @@
 import { createContext, FC } from "react";
 
 // in this case I want to define a type for Typescript. I will the add it as a generic
-import { ThemeTypes } from "@/app/typescript/types/types";
+import { ThemeTypes } from '@/types/types'
 
 // this will be okay for JS, but for TS, we will have the other
 //? const ThemeContext = createContext('light')

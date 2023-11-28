@@ -2,7 +2,7 @@
 import React from 'react'
 
 import { data } from './data';
-import { PostProps } from '../../../types/types';
+import { PostProps } from '@/types/types';
 
 const FormEvent = () => {
   // console.log(data);
