@@ -55,18 +55,18 @@ const Typescript = async () => {
   // getData()
   return (
     <main className='min-h-590'>
-      <h1 className='text-4xl font-extrabold mt-5 text-cyan-200'>Learning TypeScript</h1>
+      <h1 className='text-4xl font-extrabold text-cyan-200'>Learning TypeScript</h1>
       <p className='mt-2'>You note that this is a server component, and for the cards, I have included the <b>use client</b> directive</p>
 
       <div className='flex flex-wrap gap-5 mt-3'>
-        <Link className=' py-4 px-6 rounded-full hover:translate-x-1 border-2 duration-700 transition-all hover:text-black hover:dark:bg-green-200' href = '/typescript/react_fragments'>
+        <Link className=' py-4 px-6 rounded-full hover:translate-x-1 border-2 duration-700 transition-all hover:text-black hover:dark:bg-green-200' href = '/main/react_fragments'>
           Fragments
         </Link>
 
-        <Link className=' py-4 px-6 rounded-full border-2 duration-700 transition-all hover:text-black hover:dark:bg-green-200' href = '/typescript/search_react_event'>
+        <Link className=' py-4 px-6 rounded-full border-2 duration-700 transition-all hover:text-black hover:dark:bg-green-200' href = '/main/search_react_event'>
           React Events
         </Link>
-        <Link className=' py-4 px-6 rounded-full border-2 duration-700 transition-all hover:text-black hover:dark:bg-green-200' href = '/typescript/react_states'>
+        <Link className=' py-4 px-6 rounded-full border-2 duration-700 transition-all hover:text-black hover:dark:bg-green-200' href = '/main/react_states'>
           React States
         </Link>
       </div>

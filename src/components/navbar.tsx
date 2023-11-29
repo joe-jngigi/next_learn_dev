@@ -4,6 +4,8 @@ import React, {useContext} from 'react'
 import {MdOutlineMenu } from 'react-icons/md'
 import { FaGithub, FaXTwitter } from 'react-icons/fa6'
 import { TbBrandTypescript } from 'react-icons/tb'
+import { GoShieldLock } from "react-icons/go";
+import { RiHome7Fill } from "react-icons/ri";
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -12,7 +14,7 @@ import { SideMenuContext } from '@/context/sideBarContext'
 
 import profileimg from '@/public/fxgraph.jpg'
 import { AppName } from '@/utils/ui_variables'
-import { LayoutDashboardIcon, Linkedin } from 'lucide-react'
+import {  Linkedin } from 'lucide-react'
 
 const Navbar = () => {
 
@@ -25,23 +27,30 @@ const Navbar = () => {
   console.log('toggleSideMenu' , toggleSideMenu);
   
   return (
-    <nav className=' px-3 top-5 md:w-[1200px] sticky mx-auto shadow-lg rounded-full border-1 dark:border-none backdrop-filter backdrop-blur-lg bg-opacity-50 dark:bg-main-dark-bg bg-blend-color-dodge'>
+    <nav className=' px-3 absolute top-5 mx-auto left-1/2 transform -translate-x-1/2 md:w-[1200px]  shadow-lg rounded-full border-1 dark:border-none backdrop-filter backdrop-blur-lg bg-opacity-50 dark:bg-main-dark-bg bg-blend-color-dodge'>
       <div className='flex-between'>
         {/* logo */}
         <div>
           <h1 title='This is just text, I don&apos;t want to make a logo' className='text-3xl font-bold cursor-not-allowed text-emerald-500'>{AppName}</h1>
         </div>
 
-        <div className='flex flex-row gap-6 items-center justify-center'>
+        <div className='flex flex-row gap-2 items-center justify-center'>
 
           <Link title='Main Page / Home / Joe_J' className='dark:hover:bg-main-dark-bg p-2 rounded-2xl sm:flex flex-col items-center justify-center transition-all duration-700 hover:text-emerald-500' href= '/'>
-            <LayoutDashboardIcon size={20}  className="" />
+            <RiHome7Fill size={20}   />
             <span className="text-xs pt-1 hidden sm:flex">{`<Main />`}</span>
           </Link>
 
           <Link title='Typescript' className='dark:hover:bg-main-dark-bg p-2 rounded-2xl flex flex-col items-center justify-center transition-all duration-700 hover:text-emerald-500' href='/main'>
-            <TbBrandTypescript size={20}  className="" />
+            <TbBrandTypescript size={20}  />
             <span className="text-xs pt-1 hidden sm:flex">{`<TypeScript />`}</span>
+          </Link>
+          
+          <Link title='Well, now this one you need to login' className='dark:hover:bg-main-dark-bg p-2 rounded-2xl flex flex-col items-center justify-center transition-all duration-700 hover:text-emerald-500' 
+            href='/api/auth/sign-in'
+          >
+            <GoShieldLock size = {20}/>
+            <span className="text-xs pt-1 hidden sm:flex">{`<Protected />`}</span>
           </Link>
 
         </div>

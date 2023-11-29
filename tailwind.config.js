@@ -19,9 +19,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        display: ['Open Sans', 'sans-serif'],
+        display: ['Studio-Feixen-Sans','Open Sans', 'sans-serif'],
         body: ['Lato', 'Open Sans' ,'sans-serif'],
-        about: ['Rowdies','cursive'],
+        about: ['Poppins', 'Rowdies','cursive'],
         miniabout :['Sevillana', 'cursive' ],
         gothic: ['Didact Gothic' , 'sans-serif'],
         satoshi: ['Satoshi', 'sans-serif'],

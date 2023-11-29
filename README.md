@@ -534,3 +534,9 @@ const MyFunctionalComponent = (props: MyComponentProps) => {
 ```
 
 Both approaches achieve the same result: they specify that props should conform to the MyComponentProps interface, and TypeScript enforces this type checking. You can choose the approach that you find more readable and maintainable for your codebase. Some developers prefer the FC type because it's a bit shorter and often used in React projects, while others prefer the explicit annotation for clarity.
+
+## Authenitcation Adding
+
+In this section, I a learning more on Authentication uisng nextjs. For this I will be applying a custom authentication with custom credentials. I have not used any of the authentication provider, and this is because I have used the extensively in another project. This will be helping me sharpen some skills in that.
+
+On this project, I will be using `nextAuth` It is a completely secured and flexible authentication library designed to sync with any OAuth service, with full support for passwordless signin. I will install `bcryptjs`, `next-auth` and `mongoose`; `bcryptjs` will be used in the encryption of the passwords and then `mongoose` will be used for the database, `mongodb`

@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function RootLayout({children,}: {children: React.ReactNode}) {
   return (
-    <html lang="en">
-      <body className= 'sm:w-[1900px] mx-auto sms:px-3'>
+    <html className='dark:bg-dark-hero' lang="en">
+      <body className= 'sm:w-[1800px] mx-auto sm:px-3 relative'>
         {/* Navbar */}
         <Navbar />
         {children}
