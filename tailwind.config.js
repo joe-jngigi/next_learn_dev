@@ -23,7 +23,7 @@ module.exports = {
         body: ['Lato', 'Open Sans' ,'sans-serif'],
         about: ['Poppins', 'Rowdies','cursive'],
         miniabout :['Sevillana', 'cursive' ],
-        gothic: ['Didact Gothic' , 'sans-serif'],
+        gothic: ["Euclid Circular A", 'Didact Gothic' , 'sans-serif'],
         satoshi: ['Satoshi', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
       },

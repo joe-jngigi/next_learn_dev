@@ -1,3 +1,5 @@
+import { Toaster } from 'react-hot-toast';
+
 import { Navbar } from '@/components'
 import '@/styles/globals.css'
 
@@ -11,6 +13,7 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
     <html className='dark:bg-dark-hero' lang="en">
       <body className= 'sm:w-[1800px] mx-auto sm:px-3 relative'>
         {/* Navbar */}
+        <Toaster />
         <Navbar />
         {children}
         

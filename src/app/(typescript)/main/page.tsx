@@ -55,6 +55,7 @@ const Typescript = async () => {
   // getData()
   return (
     <main className='min-h-590'>
+      
       <h1 className='text-4xl font-extrabold text-cyan-200'>Learning TypeScript</h1>
       <p className='mt-2'>You note that this is a server component, and for the cards, I have included the <b>use client</b> directive</p>
 

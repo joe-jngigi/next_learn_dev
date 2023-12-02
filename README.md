@@ -100,7 +100,7 @@ const marvelMovies = [
 }
 ```
 
-For the latter, the `console.log(eachData)` will be as show. Note that the one one last one is a string,
+For the latter, the `console.log(eachData)` will be as shown. Note that the last one is a string,
 
 ```json
 { '1': 'Iron Man (2008)' }
@@ -540,3 +540,85 @@ Both approaches achieve the same result: they specify that props should conform 
 In this section, I a learning more on Authentication uisng nextjs. For this I will be applying a custom authentication with custom credentials. I have not used any of the authentication provider, and this is because I have used the extensively in another project. This will be helping me sharpen some skills in that.
 
 On this project, I will be using `nextAuth` It is a completely secured and flexible authentication library designed to sync with any OAuth service, with full support for passwordless signin. I will install `bcryptjs`, `next-auth` and `mongoose`; `bcryptjs` will be used in the encryption of the passwords and then `mongoose` will be used for the database, `mongodb`
+
+In the next phase I will be creating the API routes to help me make data transfer to the database.
+
+## Creating APIs
+
+We create APIs in the API folder, which is in the app folder. This only applies to NextJS. In the context of APIs (Application Programming Interfaces), POST and DELETE are HTTP methods used to perform different operations on resources.
+
+We start by receiving the data from the request, which is returned as a promise. I mean how does this work?
+
+This below is the code that is user to send the data to the database. So, we destructure each section
+
+```TS
+export const POST = async (req: Request) => {
+    try {
+        const user_data = await req.json();
+        const { user_password, user_email, user_name } = user_data;
+
+        // Your logic for handling the user data goes here
+    } catch (error) {
+        // Handle errors
+    }
+};
+
+```
+
+- The function is marked as `async`, indicating that it will perform **`asynchronous operations`** .
+- The function takes a single parameter `req`, which is assumed to be an `Express.js` Request object.
+- This line is using await to asynchronously wait for the JSON body of the incoming `HTTP request (req)` to be parsed. `req.json()` is a method provided by Express.js to parse the JSON body of a request.
+
+### Take away 4
+
+This is how we create APIS in JS. Note we have to install exrpess
+
+```TS
+
+const express = require('express');
+const app = express();
+const port = 3000; // You can use any available port
+
+// Define a route for the API
+app.get('/api/greeting', (req, res) => {
+    res.json({ message: 'Hello, this is your API!' });
+});
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
+
+```
+
+**What are asynchronous operations?** </br>
+
+Asynchronous operations in programming refer to tasks that don't necessarily execute in a sequential or synchronous order. Instead of waiting for each operation to complete before moving on to the next one, asynchronous programming allows a program to continue executing other tasks while waiting for certain operations to finish. This is particularly useful for tasks that might take some time to complete, such as reading from a file, making a network request, or querying a database.
+
+## Connecting to Database
+
+I am using `Mongodb Atlas`. we use this npm package. Remember this isa no SQL database
+
+```bash
+npm isntall mongoose
+```
+
+After that, we create a function to call on the mongodb. Remember to make the configurations in `Mongodb Atlas`
+
+```TS
+import mongoose from 'mongoose'
+
+export const connectToMongoDB = async () =>{
+
+    try {
+        await mongoose.connect(process.env.MONGODB_URI as string)
+        console.log('Connect to MongoDB'); 
+    } catch (error) {
+        console.log("Error Making a connection to MongoDB", error);
+        
+    }
+    
+}
+```
+
+Next step is usually to make a schema for this. For that we will put the schemas in a folder called models
