@@ -571,6 +571,13 @@ export const POST = async (req: Request) => {
 
 ### Take away 4
 
+Also, on this note, I wanted to check whether the email existed, so that the user can not create an account using the same email again. This, to my surprise, implemented the `POST` method and not the `GET` method. The choice between using a GET request and a POST request depends on the nature of the operation and the conventions of RESTful API design. In this case it meant that for the POST, The I could effect the changes, and secondly, I only wanted the email not to be cached.
+
+> GET: It is considered idempotent, meaning that making the same request multiple times should have the same effect as making it once. GET requests are typically used for retrieving information and should not have side effects on the server.
+> POST: It is not necessarily idempotent, and it is often used for operations that can cause a change in the server's state. In your case, it looks like the API is checking for the existence of a user based on their email, which could be considered a non-idempotent operation.
+
+### Take away 5
+
 This is how we create APIS in JS. Note we have to install exrpess
 
 ```TS
@@ -597,28 +604,103 @@ Asynchronous operations in programming refer to tasks that don't necessarily exe
 
 ## Connecting to Database
 
-I am using `Mongodb Atlas`. we use this npm package. Remember this isa no SQL database
+I am using `Mongodb Atlas`. we use this npm package. Remember this isa no SQL database. There a various ways to connect to a the MongoDB database, I am familiar with using `MongoDB Driver` and `Mongoose Client`. Mongoose is better because it is robust. Below, I will provide the code used for connection to the mongoDB using `Mongoose`
 
 ```bash
 npm isntall mongoose
 ```
 
-After that, we create a function to call on the mongodb. Remember to make the configurations in `Mongodb Atlas`
-
 ```TS
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-export const connectToMongoDB = async () =>{
+const MONGO_URI = process.env.MONGODB_URI as string;
 
-    try {
-        await mongoose.connect(process.env.MONGODB_URI as string)
-        console.log('Connect to MongoDB'); 
-    } catch (error) {
-        console.log("Error Making a connection to MongoDB", error);
-        
-    }
-    
+let IS_CONNECTED = false
+
+if (!MONGO_URI) {
+  throw new Error('Please define the MONGO_URI environment variable');
 }
+
+
+const connectDB = async () =>  {
+  
+  if (IS_CONNECTED) {
+    console.log('Establishing Connection....');
+    return
+  }
+
+  try {
+    await mongoose.connect(MONGO_URI)
+    IS_CONNECTED = true
+
+    console.log('Connection Established');
+    
+  } catch (error) {
+    console.log('Error when Establishing a Connection');
+  }
+
+}
+
+export const { db } = mongoose.connection;
+
+export default connectDB;
+
 ```
 
-Next step is usually to make a schema for this. For that we will put the schemas in a folder called models
+The first line imports the Mongoose library, which is an ODM `(Object Data Modeling)` library for MongoDB and Node.js. It provides a way to interact with MongoDB using JavaScript or TypeScript. The line `await mongoose.connect(MONGO_URI);` is a crucial part of establishing a connection to a MongoDB database using Mongoose.
+
+The `mongoose.connect`: This is a method provided by the Mongoose library to connect to a MongoDB database. It establishes a connection between a Node.js application and the specified MongoDB database through the `MONGO_URI`.
+
+It's worth noting that this line is typically called when the application starts or when it needs to connect to the MongoDB database. Once the connection is established, it can be reused throughout the application's lifecycle, and you don't need to establish a new connection every time you interact with the database.
+
+The line `export default connectDB;` exports the connectDB function, allowing other parts of the application to use it to establish a connection to the MongoDB database.
+
+The line `export const { db } = mongoose.connection;` exports the db object from Mongoose's connection. It can be used to interact with the connected MongoDB database in other parts of the application.
+
+## Exports in JavaScript/TypeScript
+
+In JavaScript and TypeScript, there are two primary ways to export functionality from a module: named exports and default exports.
+
+> **Named Exports:**
+
+With named exports, you export specific functions or variables by name. In this case, you would import the connectDB function using its name when importing in another file
+
+```TS
+export const connectDB = async () => {
+  // ...
+};
+// Module with named exports
+export const functionA = () => { /* ... */ };
+export const functionB = () => { /* ... */ };
+
+```
+
+In Another File, you can have
+
+```TS
+import { connectDB } from './yourModule';
+// Importing named exports
+import { functionA, functionB } from './yourModule';
+```
+
+Named exports are useful when you want to export multiple functions, variables, or classes from a module, and you want to be explicit about which ones you are importing in another file. With named exports, you can have multiple functions, variables, or classes within the same file, and each of them can be exported independently. This is useful when you want to organize related functionality within a single module.
+
+> **Default Export:**
+
+With a default export, you are exporting a single "default" entity from your module. When importing, you can give it any name you want:
+
+```TS
+const connectDB = async () => {
+  // ...
+};
+
+export default connectDB;
+```
+
+So I can have the name Change to whatever I want like here:
+
+```TS
+import myCustomName from './yourModule';
+```
+
+Default exports are convenient when you have a single main entity to export from a module. It simplifies the import syntax because you can choose any name for the imported entity.

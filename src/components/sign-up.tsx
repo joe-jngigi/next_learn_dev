@@ -7,8 +7,6 @@ import axios from 'axios'
 
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import connectDB from '@/lib/mongodb';
-import User from '@/model/user';
 
 type TUserTypes = {
   username: string,
@@ -44,19 +42,16 @@ const SignUp = () => {
         }
       })
       
-      const getUserEmail = userData.user_email
-
-      console.log('Get userEmail', getUserEmail);
-      
       const USER_EXIST = await axios.post('/api/check-user', userData);
-      
 
-      if (USER_EXIST.data.userExist) {
-        console.log('User Exist');
-      } else {
-        console.log('User does not exist');
+      console.log(USER_EXIST.data);
+
+      if (USER_EXIST.data.userExist != null) {
+        toast.error('User already Exisits');
+        (e.target as HTMLFormElement).reset();
+        router.replace('/api/auth/sign-in')
+        return
       }
-
 
       await axios.post('/api/sign-user', userData)
       toast.success('Data Transfer Successful');

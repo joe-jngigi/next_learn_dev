@@ -14,7 +14,6 @@ export const POST = async (req: Request) =>{
         const {user_password, user_email, username} = user_data
 
         const hashed_password = await bcrypt.hash(user_password, 10)
-
         
         await User.create({
             username,
