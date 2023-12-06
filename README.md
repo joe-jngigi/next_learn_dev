@@ -291,6 +291,24 @@ To create context, you want to start by importing `createContext`
 Does a form capture the data from the inputs automatically?
 >> Absolutely Yes, a form captures data from the input fields automatically when it's submitted. However, in the provided code, there are a few modifications needed to correctly capture and handle the form data. Remember in this code, I am using typescript, so I will need to be able to handle data types for the data entered by the user
 
+I really don't require this piece of code, but I learnt it anyway
+
+```TS
+const formData = new FormData(e.currentTarget)
+  const userData: TUserTypes = {
+    user_email: '',
+    user_password: '',
+  }
+
+  formData.forEach((value, key) =>{
+    if (typeof value === 'string') {
+      userData[key as keyof TUserTypes] = value;
+    } else if (value instanceof File) {
+          // Handle the File object, if needed
+    }
+      })
+```
+
 So basically this is how the form is supposed to be created
 
 ```TSX
@@ -656,6 +674,109 @@ It's worth noting that this line is typically called when the application starts
 The line `export default connectDB;` exports the connectDB function, allowing other parts of the application to use it to establish a connection to the MongoDB database.
 
 The line `export const { db } = mongoose.connection;` exports the db object from Mongoose's connection. It can be used to interact with the connected MongoDB database in other parts of the application.
+
+## Next Auth
+
+NextAuth.js. NextAuth.js is a popular authentication library for Next.js applications. It simplifies the implementation of authentication by providing a set of pre-built authentication providers, such as OAuth, JWT, email/password, and more.
+
+In this application, we have a custom signIn/signOut page, and in that note, we have already set up the database connection and made sure we can sign up. In this phase, we need to have what we call the protection of pages, which is crutial to maybe protect important data. By this, we are using `next-auth` as the provider, where we start by setting up the authentication. For this we create an API provided by next-auth, thorugh the path `api/auth/[...nextuth]`
+
+```TS
+import NextAuth from "next-auth"
+
+import { options } from "./options"
+
+const handler = NextAuth(options)
+
+export { handler as GET, handler as POST }
+```
+
+This code snippet is responsible for initializing the NextAuth authentication library and exporting the handler for the /api/auth route. This allows the application to handle authentication requests for both GET and POST methods.
+
+The spread operator `(...)` is used in the `api/auth/[...nextuth]` route to create a catch-all route. This means that any request that starts with /api/auth will be handled by the NextAuth handler, regardless of the rest of the path. This is useful for handling authentication requests that come from different parts of the application.
+
+For example, if the application has a sign-in page at /auth/signin, then the api/auth/[...nextuth] route will handle the request to that page. This means that the application does not need to create a separate route for the sign-in page.
+
+### Options
+
+We have an import of the options, which provides an array of different providers. We setup an object, and in this case, we have added it in a separate file where we have an array of providers like, `Github`, `Google` and `Credetials`. Credentials are where we have a custom database you are fetching the user from.
+
+```TS
+import { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials"
+
+export const options: NextAuthOptions = {
+
+    providers: [
+        CredentialsProvider({
+          // The name to display on the sign in form (e.g. 'Sign in with...')
+          name: 'Credentials',
+          
+          credentials: {
+            username: {  },
+            password: {  }
+          },
+
+
+          credentials: {
+            username: { label: "Username", type: "text", placeholder: "jsmith" },
+            password: { label: "Password", type: "password" }
+          },
+          
+          async authorize(credentials, req) {
+            
+            const res = await fetch("/your/endpoint", {
+              method: 'POST',
+              body: JSON.stringify(credentials),
+              headers: { "Content-Type": "application/json" }
+            })
+            const user = await res.json()
+      
+            // If no error and we have user data, return it
+            if (res.ok && user) {
+              return user
+            }
+            // Return null if user data could not be retrieved
+            return null
+          }
+        })
+      ]
+}
+```
+
+The credentials is used to generate a suitable form on the sign in page. You can specify whatever fields you are expecting to be submitted. domain, username, password, 2FA token, etc. You can pass any HTML attribute to the `<input>` tag through the object. On the `authorize` function, You need to provide your own logic here that takes the credentials. You should note that this below is usually some random string.
+
+You might note that we have an object, `credentials` with data objects `username` and a `password`. When we are creating a custom login, we will have to leave these objects empty. Leaving them with the input varaibles means that it is going to generate a login form for us.
+
+```BASH
+NEXTAUTH_SECRET = '4sQLuAOp8ST6ettlsBX0CI2toLKb7KT8l81+JV+JIc0='
+```
+
+After having setup this, next is usually to setup a session provider, which is a client component. For a client to access the data that we get from the session, we need to create an AuthProvider that acts the same way as the react context. We do that by calling the `SessionProivder`. It is a Provider to wrap the app in to make session data available globally. Can also be used to throttle the number of requests to the endpoint /api/auth/session. We wrap the mainlayout with the session provider, now `AuthSessionProvider` created. The reason we created a separate file is because session provider is a client component.
+
+```TSX
+'use client'
+
+import React from 'react'
+
+import { SessionProvider} from 'next-auth/react'
+import { TLayoutProp } from '@/types/types'
+
+const AuthSessionProvider: React.FC<TLayoutProp> = ({children}) => {
+  return (
+    <SessionProvider>
+      {children}
+    </SessionProvider>
+  )
+}
+
+export default AuthSessionProvider
+
+```
+
+Next is usually to have a middleware file. The middleware file is supposed to be in the same layer as the app directory.
+
+Middleware in NextJS auth will require one line which will be used to protect the enitre site [NextJSMiddleware](https://next-auth.js.org/configuration/nextjs#middleware). WHen you add this pice of code, it protects the entire website.
 
 ## Exports in JavaScript/TypeScript
 

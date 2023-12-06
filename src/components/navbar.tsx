@@ -27,7 +27,7 @@ const Navbar = () => {
   console.log('toggleSideMenu' , toggleSideMenu);
   
   return (
-    <nav className=' px-3 absolute top-5 mx-auto left-1/2 transform -translate-x-1/2 md:w-[1200px]  shadow-lg rounded-full border-1 dark:border-none backdrop-filter backdrop-blur-lg bg-opacity-50 dark:bg-main-dark-bg bg-blend-color-dodge'>
+    <nav className=' px-3 fixed top-5 mx-auto left-1/2 transform -translate-x-1/2 md:w-[1200px]  shadow-lg rounded-full border-1 dark:border-none backdrop-filter backdrop-blur-lg bg-opacity-50 dark:bg-main-dark-bg bg-blend-color-dodge'>
       <div className='flex-between'>
         {/* logo */}
         <div>
@@ -48,6 +48,7 @@ const Navbar = () => {
           
           <Link title='Well, now this one you need to login' className='dark:hover:bg-main-dark-bg p-2 rounded-2xl flex flex-col items-center justify-center transition-all duration-700 hover:text-emerald-500' 
             href='/api/auth/sign-in'
+            
           >
             <GoShieldLock size = {20}/>
             <span className="text-xs pt-1 hidden sm:flex">{`<Protected />`}</span>

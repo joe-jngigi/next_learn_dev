@@ -8,12 +8,6 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
-type TUserTypes = {
-  username: string,
-  user_email: string,
-  user_password: string
-}
-
 const SignUp = () => {
 
   const router = useRouter()
@@ -27,37 +21,28 @@ const SignUp = () => {
     e.preventDefault()
     
     try {
-
-      const formData = new FormData(e.currentTarget)
-      const userData: TUserTypes = {
-        username: '',
-        user_email: '',
-        user_password: '',
-      }
-      formData.forEach((value, key) =>{
-        if (typeof value === 'string') {
-          userData[key as keyof TUserTypes] = value;
-        } else if (value instanceof File) {
-          // Handle the File object, if needed
-        }
-      })
+ 
+      const USER_EXIST = await axios.post('/api/check-user', {userEmail});
       
-      const USER_EXIST = await axios.post('/api/check-user', userData);
+      console.log(USER_EXIST.data.u_mail);
 
-      console.log(USER_EXIST.data);
-
-      if (USER_EXIST.data.userExist != null) {
-        toast.error('User already Exisits');
+      if (!!USER_EXIST.data.u_mail) {
+        toast.error('User already Exists');
         (e.target as HTMLFormElement).reset();
+        router.refresh()
         router.replace('/api/auth/sign-in')
         return
       }
+      
+      console.log('cleint', userEmail, userPassword, userName);
+      
 
-      await axios.post('/api/sign-user', userData)
+      await axios.post('/api/sign-user', {userEmail, userPassword, userName})
       toast.success('Data Transfer Successful');
 
       (e.target as HTMLFormElement).reset()
 
+      router.refresh()
       router.replace('/api/auth/sign-in')
 
     } catch (error) {
@@ -93,3 +78,4 @@ const SignUp = () => {
 }
 
 export default SignUp
+

@@ -12,21 +12,35 @@ export const POST = async (req: Request) => {
     if (collectionCount === 0) {
       console.log("Database empty, creating collection...");
       await db.createCollection("users", { validationLevel: "strict" });
+      
       console.log("Collection created successfully!");
     }
 
-    const userEmail = await req.json();
-    const check_email = userEmail.user_email;
-    console.log(check_email);
+    const { userEmail } = await req.json();
 
-    const userExist = await User.findOne({ user_email: check_email });
+    console.log(userEmail);
+
+    const userExist = await User.findOne({ user_email: userEmail });
     console.log("User Check: ", userExist, "\n");
-    
-    return NextResponse.json({
-        userExist,
-        message: "Check is user Exist",
+
+    // Check if userExist is falsy (null or undefined)
+    const u_mail = userExist ? userExist.user_email : null;
+
+    if (userExist) {
+      return NextResponse.json({
+        u_mail,
+        message: "Check if user Exist",
         status: 200,
+      });
+    }
+
+    // Return null if user doesn't exist
+    return NextResponse.json({
+      u_mail,
+      message: "User not found",
+      status: 200,
     });
+
   } catch (error) {
     console.log("User Exist Error/api/check-user", error);
     return NextResponse.json({

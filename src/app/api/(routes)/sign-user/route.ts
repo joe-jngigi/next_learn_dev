@@ -10,14 +10,15 @@ export const POST = async (req: Request) =>{
     try {
         await connectDB()
 
-        const user_data = await req.json()
-        const {user_password, user_email, username} = user_data
+        const {userEmail, userPassword, userName} = await req.json()
 
-        const hashed_password = await bcrypt.hash(user_password, 10)
-        
+        console.log("Confirm data", userEmail, userPassword, userName);
+
+        const hashed_password = await bcrypt.hash(userPassword, 10)
+  
         await User.create({
-            username,
-            user_email,
+            username: userName,
+            user_email: userEmail,
             user_password: hashed_password
         })
         
