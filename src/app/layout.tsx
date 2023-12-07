@@ -13,7 +13,7 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
   return (
     <AuthSessionProvider>
       <html className='dark:bg-dark-hero' lang="en">
-        <body className= 'sm:w-[1800px] mx-auto sm:px-3 relative'>
+        <body className= 'sm:min-w-[1800px] mx-auto sm:px-3 relative'>
             
             {/* Navbar */}
             <Toaster />
