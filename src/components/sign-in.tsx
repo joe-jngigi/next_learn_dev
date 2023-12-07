@@ -29,6 +29,9 @@ const SignUp = () => {
 
       const USER_EXIST = await axios.post('/api/check-user', {userEmail});
 
+      console.log('Is this working', USER_EXIST);
+      
+
       if (!USER_EXIST.data.u_mail) {
         toast.error('User does not Exist');
         (e.target as HTMLFormElement).reset(); 
