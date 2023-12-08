@@ -54,6 +54,7 @@ const SignUp = () => {
       if (!userResponse?.error) {
         toast.success('User Exists');
         (e.target as HTMLFormElement).reset();
+        router.refresh();
         router.replace('/private')
       }
 
@@ -65,9 +66,9 @@ const SignUp = () => {
   }
 
   return (
-    <div className='grid place-items-center p-3 pt-32'>
-      <div className='dark:bg-black shadow-xl border-1 dark:border-none bg-opacity-50 backdrop-blur-md rounded-2xl p-2 w-full md:max-w-[700px]'>
-        <div className='dark:bg-main-dark-bg rounded-xl p-3 flex items-center justify-center flex-col'>
+    <div className=' w-full p-3 pt-32 flex justify-center items-center '>
+      <div className=' shadow-xl border-1 dark:border-none bg-opacity-50 backdrop-blur-md rounded-2xl p-2 w-full md:max-w-[700px] flex items-center justify-center flex-col'>
+
           <h1 className='text-xl font-bold mb-5'>Sign In</h1>
           
           <form onSubmit={handleSubmit} className='flex flex-col gap-2 w-full md:w-[500px]'>
@@ -83,7 +84,7 @@ const SignUp = () => {
           <span className='w-full mt-5 text-14 flex flex-col sm:flex-row items-center justify-between px-4 gap-2'>Yoooh! Lets sign you up 😶‍🌫️🫡
             <Link className='underline uppercase text-base font-semibold tracking-wider' href= '/api/auth/sign-up'>Sign Up</Link>
           </span>
-        </div>
+
       </div>
     </div>
   )

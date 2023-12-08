@@ -3,7 +3,7 @@ import React from 'react'
 
 const Spage = () => {
   return (
-    <main className='pt-20 h-screen'>
+    <main className=' pt-20 h-screen'>
       <section className=' h-full'>
         <SignUp/>
       </section>

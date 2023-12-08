@@ -38,6 +38,8 @@ export const options: NextAuthOptions = {
 
               const matchPassword = await bcrypt.compare(userPassword || '', user.user_password);
 
+              console.log(matchPassword);
+              
               if (matchPassword) {
                 return user ;
               }

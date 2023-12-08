@@ -8,7 +8,7 @@ const Page = () => {
     <div>
       Route
       <br/>
-      <button onClick={() => signOut()} className='black_btn'>Logout</button>
+      Welcome here @ who
     </div>
   )
 }

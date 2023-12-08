@@ -776,7 +776,49 @@ export default AuthSessionProvider
 
 Next is usually to have a middleware file. The middleware file is supposed to be in the same layer as the app directory.
 
-Middleware in NextJS auth will require one line which will be used to protect the enitre site [NextJSMiddleware](https://next-auth.js.org/configuration/nextjs#middleware). WHen you add this pice of code, it protects the entire website.
+Middleware in NextJS auth will require one line which will be used to protect the enitre site [NextJSMiddleware](https://next-auth.js.org/configuration/nextjs#middleware). WHen you add this pice of code, it protects the entire website. We can also protect certain pages by adding the matcher line of code
+
+On this trend, remember we have to have the data sent to the database so we can verify that the user has already been registered and we can verify the user. In next Auth, this is done on the option (can call it any name) object. It is good to note that `option` is called in the route of the next Auth, remember this is an API for Next Authenitcation.
+
+```TS
+CredentialsProvider({
+  // The name to display on the sign in form (e.g. 'Sign in with...')
+  name: 'Credentials',
+
+  credentials: {
+    userEmail: { },
+    userPassword: {  },
+  },
+
+  async authorize(credentials, req) {
+
+    const {userEmail, userPassword} = credentials ?? {}
+    try {
+      connectDB();
+      const user = await User.findOne({user_email: userEmail})
+
+      if (!user) {
+        return
+      }
+
+      const matchPassword = await bcrypt.compare(userPassword || '', user.user_password);
+
+      if (matchPassword) {
+        return user ;
+      }
+
+      return
+
+      } catch (error) {
+        console.log(error);       
+      }         
+    }
+  })
+```
+
+On this code, we have the credentials. As noted earlier, credentials can be an empty project if we have our own custom login screens. Now in the `authorize` function the credentials receives data from the user, where the data is used to verify the user. On this code, we have taken the `credentials` and destructured them into an object where we can have the email and the password for look up in the database. The user is first looked for using the email, and if the user is available we then fetch the password for comparison, wjere if the user is available, the responce will be the user. Of not, the response will have an error, meaning the password do not match.
+
+We then have the getServerSession. In NextAuth.js, getServerSession is a server-side helper function used to retrieve the current user's session information. It's particularly useful for securing server-side rendered pages and API routes by making authorization decisions based on the user's session data.
 
 ## Exports in JavaScript/TypeScript
 
