@@ -1,16 +1,16 @@
-import { AppName } from '@/utils/ui_variables'
+import { getServerSession } from 'next-auth/next';
 
 import ResponsiveNav from './sub-components/responsive-nav'
 import PagesLinks from './sub-components/pages-links';
-import { getServerSession } from 'next-auth';
-import {  Session } from '@/types/types';
+
+import { AppName } from '@/utils/ui_variables'
 
 const Navbar = async () => {
 
   const Session = await getServerSession()
 
 
-  console.log("Server Session", Session);
+  console.log("Server Session", Session?.user);
   
   
   return (

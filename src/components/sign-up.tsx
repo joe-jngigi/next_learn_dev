@@ -44,6 +44,7 @@ const SignUp = () => {
 
       router.refresh()
       router.replace('/api/auth/sign-in')
+      
 
     } catch (error) {
       console.log('Error When Transferring data', error);

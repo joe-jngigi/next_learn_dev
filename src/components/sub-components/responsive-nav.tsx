@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {MdOutlineMenu } from 'react-icons/md'
 import { FaGithub, FaXTwitter } from 'react-icons/fa6'
 
@@ -14,14 +14,14 @@ import { SideMenuContext } from '@/context/sideBarContext'
 import profileimg from '@/public/fxgraph.jpg'
 import LoginBtn from './login-btn'
 import { Session } from '@/types/types'
+import { useSession } from 'next-auth/react'
 
 const ResponsiveNav =  ({Session}: {Session: Session | null}) => {
 
-  console.log(Session?.user?.email);
+  const { data: session, status } = useSession()
   
-  
-     // const [notificationDropdown, setNotificationDropdown] = useState(false)
-  // const [toggleMenu, setToggleMenu] = useState(false)
+
+  console.log('Session data', session);
 
   // Now I Can come destructure the theme value, and now this component will always know the current state of the theme value
   const { toggleSideMenu, settoggleSideMenu } = useContext(SideMenuContext)
@@ -71,7 +71,7 @@ const ResponsiveNav =  ({Session}: {Session: Session | null}) => {
             <span>
               {
                 Session ? (<LoginBtn setNotificationDropdown = {setNotificationDropdown}/>) :(
-                  <Link className='black_btn' href= "/api/auth/sign-in">Sign In</Link>
+                  <Link onClick={() => setNotificationDropdown(false)} className='black_btn' href= "/api/auth/sign-in">Sign In</Link>
                 )
               }
             </span>

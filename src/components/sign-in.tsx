@@ -40,7 +40,7 @@ const SignUp = () => {
       }
   
       const userResponse = await signIn('credentials', {
-        userEmail, userPassword, redirect: false,
+        userEmail, userPassword, redirect: false, callbackUrl: '/private'
       })
 
       console.log(userResponse);
@@ -56,6 +56,7 @@ const SignUp = () => {
         (e.target as HTMLFormElement).reset();
         router.refresh();
         router.replace('/private')
+        window.location.assign('/private')
       }
 
     } catch (error) {

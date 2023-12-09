@@ -1,4 +1,4 @@
-import connectDB, { db } from "@/lib/mongodb";
+import connectDB from "@/lib/mongodb";
 import User from "@/model/user";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
@@ -31,7 +31,8 @@ export const options: NextAuthOptions = {
               
               const user = await User.findOne({user_email: userEmail})
 
-
+              console.log("User Confirm Available \n", user);
+              
               if (!user) {
                 return
               }
@@ -41,8 +42,15 @@ export const options: NextAuthOptions = {
               console.log(matchPassword);
               
               if (matchPassword) {
-                return user ;
+                return {
+                  id: user._id.toString(),
+                  name: user.username,
+                  email: user.user_email,
+                 
+                } 
               }
+
+              return user
 
               return
 

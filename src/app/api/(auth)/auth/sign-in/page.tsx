@@ -1,7 +1,17 @@
-import SignIn from '@/components/sign-in'
 import React from 'react'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
 
-const Spage = () => {
+import SignIn from '@/components/sign-in'
+
+const Spage = async () => {
+
+  const session = await getServerSession()
+
+  if (session) {
+    redirect('/private')
+  }
+  
   return (
     <main className='pt-20 min-h-screen'>
       <section className=' w-full   h-[120vh]'>

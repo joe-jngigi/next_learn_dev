@@ -24,7 +24,7 @@ export const POST = async (req: Request) => {
     console.log(userEmail);
 
     const userExist = await User.findOne({ user_email: userEmail });
-    console.log("User Check: ", userExist, "\n");
+    // console.log("User Check: ", userExist, "\n");
 
     // Check if userExist is falsy (null or undefined)
     const u_mail = userExist?.user_email || null;
