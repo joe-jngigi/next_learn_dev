@@ -3,16 +3,18 @@ import { AppName } from '@/utils/ui_variables'
 import ResponsiveNav from './sub-components/responsive-nav'
 import PagesLinks from './sub-components/pages-links';
 import { getServerSession } from 'next-auth';
+import {  Session } from '@/types/types';
 
 const Navbar = async () => {
 
-  const session = await getServerSession()
+  const Session = await getServerSession()
 
-  console.log("Server Session", session);
+
+  console.log("Server Session", Session);
   
   
   return (
-    <nav className='z-50 px-3 fixed top-5 mx-auto left-1/2 transform -translate-x-1/2 w-full xl:w-[1200px]  shadow-lg rounded-full border-1 dark:border-none backdrop-filter backdrop-blur-lg bg-opacity-50 dark:bg-main-dark-bg bg-blend-color-dodge'>
+    <nav className='z-50 px-3 fixed top-5 mx-auto left-1/2 transform -translate-x-1/2 w-full xl:w-[1200px]  shadow-lg rounded-full border-1 dark:border-none backdrop-filter backdrop-blur-lg bg-opacity-50 dark:bg-main-dark-bg/20 bg-blend-color-dodge'>
       <div className='flex-between'>
         {/* logo */}
         <div>
@@ -25,7 +27,7 @@ const Navbar = async () => {
 
         {/* Menu */}
         <>
-          <ResponsiveNav/>
+          <ResponsiveNav Session={Session}/>
         </>
       </div>
     </nav>

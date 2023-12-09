@@ -1,10 +1,13 @@
-import connectDB, { db } from "@/lib/mongodb";
+import connectDB from "@/lib/mongodb";
 import User from "@/model/user";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
   try {
     await connectDB();
+    const connection = await connectDB();
+    const { db } = connection;
+
 
     const collectionCount = (await db.listCollections().toArray()).length;
     console.log(collectionCount);

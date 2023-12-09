@@ -13,7 +13,17 @@ export type TLayoutProp = {
     children: React.ReactNode
 }
 
-export type PostProps ={
+export interface Session {
+    user?: {
+      name?: string | null
+      email?: string | null
+      image?: string | null
+    }
+    
+  }
+
+
+export type PostProps = {
     id: number,
     title: string,
     body: string,

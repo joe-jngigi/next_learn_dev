@@ -251,7 +251,7 @@ body {
 }
 
 .glassmorphism {
-  @apply rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-5;
+  @apply   shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur;
 }
 
 .prompt_layout {
@@ -278,7 +278,7 @@ body {
 }
 
 .dropdown {
-  @apply z-[1000] absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white dark:bg-black min-w-[120px] flex flex-col gap-2 justify-end items-center border-1 border-slate-200 bg-opacity-90 backdrop-blur-md;
+  @apply z-[1000] absolute right-0 top-full mt-3 w-full p-5 rounded-lg  dark:bg-black min-w-[120px] flex flex-col gap-2 justify-end items-center border-1 dark:border-slate-800 border-slate-200 bg-opacity-90 backdrop-blur-md;
 }
 
 .dropdown_link {

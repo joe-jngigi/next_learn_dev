@@ -13,8 +13,13 @@ import { SideMenuContext } from '@/context/sideBarContext'
 
 import profileimg from '@/public/fxgraph.jpg'
 import LoginBtn from './login-btn'
+import { Session } from '@/types/types'
 
-const ResponsiveNav =  ( ) => {
+const ResponsiveNav =  ({Session}: {Session: Session | null}) => {
+
+  console.log(Session?.user?.email);
+  
+  
      // const [notificationDropdown, setNotificationDropdown] = useState(false)
   // const [toggleMenu, setToggleMenu] = useState(false)
 
@@ -64,7 +69,11 @@ const ResponsiveNav =  ( ) => {
             <Link onClick={() => setNotificationDropdown(false)} href= ''>Notifications</Link>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, officiis?</p>
             <span>
-              <LoginBtn setNotificationDropdown = {setNotificationDropdown}/>
+              {
+                Session ? (<LoginBtn setNotificationDropdown = {setNotificationDropdown}/>) :(
+                  <Link className='black_btn' href= "/api/auth/sign-in">Sign In</Link>
+                )
+              }
             </span>
             
           </div>
