@@ -278,7 +278,7 @@ body {
 }
 
 .dropdown {
-  @apply z-[1000] absolute right-0 top-full mt-3 w-full p-5 rounded-lg  dark:bg-black min-w-[120px] flex flex-col gap-2 justify-end items-center border-1 dark:border-slate-800 border-slate-200 bg-opacity-90 backdrop-blur-md;
+  @apply z-[1000] absolute right-0 top-full mt-3 w-full p-5 rounded-lg  dark:bg-black bg-white/90 min-w-[50px] flex flex-col gap-2 justify-end items-center border-1 dark:border-slate-800 border-slate-200 backdrop-blur-md;
 }
 
 .dropdown_link {

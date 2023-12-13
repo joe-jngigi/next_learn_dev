@@ -67,7 +67,7 @@ const ResponsiveNav =  ({Session}: {Session: Session | null}) => {
         {
           notificationDropdown && <div className='  dropdown duration-500 transition-all'>
             <Link onClick={() => setNotificationDropdown(false)} href= ''>Notifications</Link>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, officiis?</p>
+            <p>Lorem ipsum, </p>
             <span>
               {
                 Session ? (<LoginBtn setNotificationDropdown = {setNotificationDropdown}/>) :(

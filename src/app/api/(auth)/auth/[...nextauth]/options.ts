@@ -22,7 +22,7 @@ export const options: NextAuthOptions = {
             userPassword: {  },
           },
 
-          async authorize(credentials, req) {
+          async authorize(credentials) {
 
             const {userEmail, userPassword} = credentials ?? {}
 
@@ -42,17 +42,11 @@ export const options: NextAuthOptions = {
               console.log(matchPassword);
               
               if (matchPassword) {
-                return {
-                  id: user._id.toString(),
-                  name: user.username,
-                  email: user.user_email,
-                 
-                } 
+                return user
+
               }
 
-              return user
-
-              return
+              return null
 
             } catch (error) {
               console.log(error);
@@ -63,7 +57,7 @@ export const options: NextAuthOptions = {
         })
     ],
     session: {
-      strategy: 'jwt'
+      strategy: 'jwt',
     },
     
     secret: process.env.NEXTAUTH_SECRET,

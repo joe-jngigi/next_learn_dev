@@ -673,7 +673,7 @@ It's worth noting that this line is typically called when the application starts
 
 The line `export default connectDB;` exports the connectDB function, allowing other parts of the application to use it to establish a connection to the MongoDB database.
 
-The line `export const { db } = mongoose.connection;` exports the db object from Mongoose's connection. It can be used to interact with the connected MongoDB database in other parts of the application.
+
 
 ## Next Auth
 
@@ -716,8 +716,6 @@ export const options: NextAuthOptions = {
             username: {  },
             password: {  }
           },
-
-
           credentials: {
             username: { label: "Username", type: "text", placeholder: "jsmith" },
             password: { label: "Password", type: "password" }
@@ -819,6 +817,39 @@ CredentialsProvider({
 On this code, we have the credentials. As noted earlier, credentials can be an empty project if we have our own custom login screens. Now in the `authorize` function the credentials receives data from the user, where the data is used to verify the user. On this code, we have taken the `credentials` and destructured them into an object where we can have the email and the password for look up in the database. The user is first looked for using the email, and if the user is available we then fetch the password for comparison, wjere if the user is available, the responce will be the user. Of not, the response will have an error, meaning the password do not match.
 
 We then have the getServerSession. In NextAuth.js, getServerSession is a server-side helper function used to retrieve the current user's session information. It's particularly useful for securing server-side rendered pages and API routes by making authorization decisions based on the user's session data.
+
+## Session in next-auth
+
+When trying to get the session for this project, I noticed that I could not get the user data I returned from the database (I have only verified this when using a custom database, I have not tested for the providers). In `options`, yes I return the user, but when the session becomes available, and I use `getServerSession` or the `useSession` hook, no data is returned. When using the Credentials provider in NextAuth.js, the data from the user is not returned by default. This behavior is intentional due to the inherent security risks associated with handling credentials such as usernames and passwords. The Credentials provider allows you to handle signing in with arbitrary credentials, but it comes with the constraint that users authenticated in this manner are not persisted in the database. Consequently, the Credentials provider can only be used if JSON Web Tokens (JWTs) are enabled for sessions
+
+The `authorize` function should return either a `user` object, which indicates the credentials are valid, or `null` if the credentials are not valid. If you return an object, it will be persisted to the `JWT` and the user will be signed in. If you return null, an error will be displayed advising the user to check their details.
+
+If you want to display the user’s name and picture when they log in using `NextAuth.js`, you can achieve this by customizing the session callback to include the necessary information. Here’s a general approach on how to do it:
+
+1. Modify the authorize function in your `[...nextauth].js` configuration file to return the user object with the desired fields, such as `name` and `image1`.
+2. Use the callbacks to customize the JWT and session tokens. Specifically, you can use the jwt callback to add any additional user data to the JWT, and the session callback to add this data to the session `object1`.
+
+Note that this is an example of how you might configure your callbacks, which are added to the options directory
+
+```TS
+callbacks: {
+  async jwt({ token, user }) {
+    // If the user object is available, add the user's name and picture to the token
+    if (user) {
+      token.name = user.name;
+      token.picture = user.image;
+    }
+    return token;
+  },
+  async session({ session, token }) {
+    // Add the user's name and picture to the session object
+    session.user.name = token.name;
+    session.user.image = token.picture;
+    return session;
+  }
+}
+
+```
 
 ## Exports in JavaScript/TypeScript
 

@@ -5,12 +5,14 @@ import PagesLinks from './sub-components/pages-links';
 
 import { AppName } from '@/utils/ui_variables'
 
+import { options} from '@/app/api/(auth)/auth/[...nextauth]/options'
+
 const Navbar = async () => {
 
-  const Session = await getServerSession()
+  const Session = await getServerSession(options)
 
 
-  console.log("Server Session", Session?.user);
+  console.log("Server Session", Session);
   
   
   return (
