@@ -20,7 +20,7 @@ const Navbar = async () => {
       <div className='flex-between'>
         {/* logo */}
         <div>
-          <h1 title='This is just text, I don&apos;t want to make a logo' className='text-3xl font-bold cursor-not-allowed text-emerald-500'>{AppName}</h1>
+          <h1 title='This is just text, I don&apos;t want to make a logo' className='logo_text text-2xl font-bold cursor-not-allowed text-emerald-500'>{AppName}</h1>
         </div>
 
         <>

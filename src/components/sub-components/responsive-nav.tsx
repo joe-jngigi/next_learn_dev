@@ -2,11 +2,9 @@
 
 import Link from 'next/link'
 
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {MdOutlineMenu } from 'react-icons/md'
-import { FaGithub, FaXTwitter } from 'react-icons/fa6'
 
-import {  Linkedin } from 'lucide-react'
 import Image from 'next/image'
 
 import { SideMenuContext } from '@/context/sideBarContext'
@@ -42,17 +40,6 @@ const ResponsiveNav =  ({Session}: {Session: Session | null}) => {
 
       {/* Desktop Navigation */}
       <div className='relative hidden md:flex justify-between items-center gap-6 rounded-2xl'>
-        <Link title='My github link... Yey. This is where I store my code... it is private I am not sure why I like it like that' className='dark:hover:bg-main-dark-bg p-2 rounded-2xl duration-500' href= 'https://github.com/joe-jngigi'>
-          <FaGithub size={20}/>
-        </Link>
-
-        <Link title='Twitter handle. I know it is X but for me it is twitter' className='text-blue-900 dark:hover:bg-main-dark-bg p-2 rounded-2xl duration-500' href= 'https://twitter.com/joe_jngigi'>
-          <FaXTwitter size={20} />
-        </Link>
-
-        <Link title='Well, this linkedin' className='text-blue-500 dark:hover:bg-main-dark-bg p-2 rounded-2xl duration-500' href= 'https://www.linkedin.com/in/joejngigi/'>
-          <Linkedin size={20}/>
-        </Link>
 
         {/* User Profile */}
         <Link onClick={() => {
